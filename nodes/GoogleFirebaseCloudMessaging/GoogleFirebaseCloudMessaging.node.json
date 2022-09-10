@@ -1,6 +1,6 @@
 
 {
-	"node": "n8n-nodes-base.firebaseCloudMessaging",
+	"node": "n8n-nodes-base.googleFirebaseCloudMessaging",
 	"nodeVersion": "0.1.0",
 	"codexVersion": "1.0",
 	"categories": ["Communication", "Developer Tools"],

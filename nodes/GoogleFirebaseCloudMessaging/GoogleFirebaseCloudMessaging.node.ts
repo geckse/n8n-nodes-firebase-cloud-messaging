@@ -7,19 +7,28 @@ import {
 	NodeOperationError,
 } from 'n8n-workflow';
 
-export class FirebaseCloudMessaging implements INodeType {
+
+export class GoogleFirebaseCloudMessaging implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Firebase Cloud Messaging',
-		name: 'firebaseCloudMessaging',
+		displayName: 'Google Firebase Cloud Messaging',
+		name: 'googleFirebaseCloudMessaging',
 		group: ['transform'],
 		version: 1,
 		description: 'Send Push Notifications to Android, iOS and Web Apps',
 		defaults: {
-			name: 'Firebase Cloud Messaging',
+			name: 'Google Firebase Cloud Messaging',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
 		properties: [
+			{
+				displayName: 'Token',
+				name: 'token',
+				type: 'string',
+				default: '',
+				placeholder: 'Placeholder value',
+				description: 'Token',
+			},
             {
 				displayName: 'Title',
 				name: 'text',
