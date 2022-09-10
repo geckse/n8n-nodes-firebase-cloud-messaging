@@ -1,0 +1,19 @@
+
+{
+	"node": "n8n-nodes-base.firebaseCloudMessaging",
+	"nodeVersion": "0.1.0",
+	"codexVersion": "1.0",
+	"categories": ["Communication", "Developer Tools"],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "todo"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "todo"
+			}
+		]
+	}
+}
