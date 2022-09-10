@@ -1,12 +1,19 @@
 
 import { IExecuteFunctions } from 'n8n-core';
+
 import {
+	IDataObject,
+	ILoadOptionsFunctions,
 	INodeExecutionData,
+	INodePropertyOptions,
 	INodeType,
 	INodeTypeDescription,
-	NodeOperationError,
+	NodeOperationError
 } from 'n8n-workflow';
 
+import {
+	googleApiRequestAllItems,
+} from './GenericFunctions';
 
 export class GoogleFirebaseCloudMessaging implements INodeType {
 	description: INodeTypeDescription = {
@@ -14,13 +21,31 @@ export class GoogleFirebaseCloudMessaging implements INodeType {
 		name: 'googleFirebaseCloudMessaging',
 		group: ['transform'],
 		version: 1,
-		description: 'Send Push Notifications to Android, iOS and Web Apps',
+		description: 'Send Push Notifications via Google Firebase Cloud Messaging to Android, iOS and Web Apps',
 		defaults: {
-			name: 'Google Firebase Cloud Messaging',
+			name: 'Firebase Cloud Messaging',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
+		credentials: [
+			{
+				name: 'googleFirebaseCloudMessagingOAuth2Api',
+				required: true,
+			},
+		],
 		properties: [
+			{
+				displayName: 'Project Name or ID',
+				name: 'projectId',
+				type: 'string',
+				default: '',
+				typeOptions: {
+					loadOptionsMethod: 'getProjects',
+				},
+				description:
+					'As displayed in firebase console URL. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code-examples/expressions/">expression</a>.',
+				required: true,
+			},
 			{
 				displayName: 'Token',
 				name: 'token',
@@ -48,6 +73,28 @@ export class GoogleFirebaseCloudMessaging implements INodeType {
 		],
 	};
 
+	methods = {
+		loadOptions: {
+			async getProjects(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+				const collections = await googleApiRequestAllItems.call(
+					this,
+					'results',
+					'GET',
+					'',
+					{},
+					{},
+					'https://fcm.googleapis.com/v1/projects',
+				);
+				// @ts-ignore
+				const returnData = collections.map((o) => ({
+					name: o.projectId,
+					value: o.projectId,
+				})) as INodePropertyOptions[];
+				return returnData;
+			},
+		},
+	};
+	
 	async execute(this: IExecuteFunctions): Promise<INodeExecutionData[][]> {
 		const items = this.getInputData();
 

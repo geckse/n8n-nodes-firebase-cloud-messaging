@@ -5,9 +5,9 @@ const scopes = [
 ];
 
 export class GoogleFirebaseCloudMessagingOAuth2Api implements ICredentialType {
-	name = 'googleFirebaseCloudFirestoreOAuth2Api';
+	name = 'googleFirebaseCloudMessagingOAuth2Api';
 	extends = ['googleOAuth2Api'];
-	displayName = 'Google Firebase Cloud Firestore OAuth2 API';
+	displayName = 'Google Firebase Cloud Messaging OAuth2 API';
 	documentationUrl = 'google';
 	properties: INodeProperties[] = [
 		{

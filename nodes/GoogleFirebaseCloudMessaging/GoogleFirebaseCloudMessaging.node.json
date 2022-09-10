@@ -7,12 +7,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "todo"
+				"url": "https://docs.n8n.io/credentials/google"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "todo"
+				"url": ""
 			}
 		]
 	}
